@@ -118,11 +118,12 @@ namespace Task7._6
 
     class Soldier
     {
-        public string Rank { get; private set; }
-        public string Name { get; private set; }
 
         private string _gun;
         private int _lifeTime;
+       
+        public string Name { get; private set; } 
+        public string Rank { get; private set; }
 
         public Soldier(string name, string gun, string rank, int lifeTime)
         {
@@ -139,7 +140,7 @@ namespace Task7._6
 
         public void ShowSortedInfo()
         {
-            Console.WriteLine($"{Name}.Звание: {Rank}.");
+            Console.WriteLine($"{Name}. Звание: {Rank}.");
         }
     }
 }
