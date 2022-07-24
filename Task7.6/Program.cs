@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,8 +26,16 @@ namespace Task7._6
         {
             ShowAllSoldiers();
             Console.WriteLine();
-            IOrderedEnumerable<Soldier> sortedSoldiers = _soldiers.OrderBy(soldier => soldier.Name);
-            ShowSortedSoldiers(sortedSoldiers);
+            var sortedSoldiers = _soldiers.Select(soldier => new
+            {
+                Name = soldier.Name,
+                Rank = soldier.Rank
+            });
+
+            foreach (var soldier in sortedSoldiers)
+            {
+                Console.WriteLine($"{soldier.Name}. Звание: {soldier.Rank}.");
+            }
         }
 
         private void ShowAllSoldiers()
@@ -36,12 +44,6 @@ namespace Task7._6
 
             foreach (Soldier soldier in _soldiers)
                 soldier.ShowInfo();
-        }
-
-        private void ShowSortedSoldiers(IOrderedEnumerable<Soldier> sortedSoldiers)
-        {
-            foreach (Soldier soldier in sortedSoldiers)
-                soldier.ShowSortedInfo();
         }
 
         private void AddSoldiers()
@@ -118,11 +120,10 @@ namespace Task7._6
 
     class Soldier
     {
-
         private string _gun;
         private int _lifeTime;
-       
-        public string Name { get; private set; } 
+
+        public string Name { get; private set; }
         public string Rank { get; private set; }
 
         public Soldier(string name, string gun, string rank, int lifeTime)
@@ -136,11 +137,6 @@ namespace Task7._6
         public void ShowInfo()
         {
             Console.WriteLine($"{Name}. Оружие: {_gun}. Звание: {Rank}. Срок службы: {_lifeTime} месяцев.");
-        }
-
-        public void ShowSortedInfo()
-        {
-            Console.WriteLine($"{Name}. Звание: {Rank}.");
         }
     }
 }
